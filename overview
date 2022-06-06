@@ -1,0 +1,1 @@
+This patch created in PD Vanilla is an interactive oscillator environment with ability to capture to 5 loop tables, playback, create new ideas in the tables.  I used memory resident tables instead of arrays saving data.  I did include options in the patch to save and reload current tables. See the sreenshot for a look!
