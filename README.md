@@ -1,1 +1,3 @@
-# Pure_Data_Work
+I've been developing patches in Pure Data since 2016 when became more aware of the platorm in a workshop at AS220, the non-profit arts org, in Providence RI.  Pure Data was created by Miller Puckket at MIT.  The development platform is known for creation of audio programming for synthesis and digital/analog audio processing.
+My current interest and work is in the electro-acoustic musical genre so some of my patches are very osciallator based and some I created are to process external audio coming into the patch.
+Though I've been registered on Github for a while I've not thought about putting Pure Data development projects up here as I originally felt the internet platform was more limited to more traditional programming language projects.  Though I play/hack/tinker with programming Pure Data is one of the few that has 'liked' me back!
