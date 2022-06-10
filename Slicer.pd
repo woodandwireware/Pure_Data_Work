@@ -1,0 +1,211 @@
+#N canvas 608 118 786 911 12;
+#N canvas 0 25 450 278 (subpatch) 0;
+#X array sampleData 2.41361e+07 float 2;
+#X coords 0 1 2.41361e+07 -1 200 140 2 0 0;
+#X restore 309 705 graph;
+#X obj 8 203 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 8 223 openpanel;
+#X msg 79 223 read -resize \$1 sampleData;
+#X obj 78 248 soundfiler;
+#X floatatom 78 271 9 0 0 0 - - -;
+#X obj 78 295 t b f;
+#X floatatom 78 318 5 0 0 0 - - -;
+#X obj 78 342 expr pow(2 \, $f1);
+#X floatatom 78 365 5 0 0 0 - - -;
+#X obj 78 390 t f f;
+#X obj 131 389 expr $f2 / $f1;
+#X floatatom 138 412 9 0 0 0 - - -;
+#X obj 112 440 t f f;
+#X obj 75 510 *;
+#X obj 110 510 *;
+#X obj 149 511 / 44.1;
+#X obj 114 484 + 1;
+#X obj 76 547 pack f f f;
+#X msg 76 580 \$1 \, \$2 \$3;
+#X obj 77 626 vline~;
+#X obj 78 654 tabread4~ sampleData;
+#X obj 78 690 *~;
+#X obj 115 694 vsl 50 40 0 2 0 0 empty faders gain 0 -9 0 10 -4034
+-1 -1 1755 1;
+#X obj 27 414 metro;
+#X obj 30 442 random;
+#X floatatom 30 469 5 0 0 0 - - -;
+#X obj 250 251 cnv 15 120 200 empty empty empty 20 12 0 14 -4032 -66577
+0;
+#X obj 262 269 bng 15 250 50 0 empty empty O 5 8 0 8 -4160 -262144
+-262144;
+#X text 278 268 Open File;
+#X floatatom 261 296 4 0 0 0 - - -;
+#X text 298 289 Choose;
+#X text 297 305 Segment, f 8;
+#X obj 269 363 vsl 80 20 0 2 0 0 empty empty vol(segment_audio) 0 -9
+0 9 -4160 -1 -1 0 1;
+#X text 283 249 Slicer;
+#X obj 386 533 phasor~;
+#X obj 382 624 *~;
+#X obj 415 627 vsl 50 40 0 2 0 0 empty faders gain 0 -9 0 10 -4034
+-1 -1 1755 1;
+#X obj 383 592 tabread4~ sampleData;
+#X msg 350 505 0;
+#X obj 386 561 *~;
+#X obj 418 560 * 44.1;
+#X obj 387 327 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 387 349 sel 1;
+#X obj 387 376 bng 15 250 50 0 empty empty St 3 7 0 8 -258113 -1 -1
+;
+#X obj 419 377 bng 15 250 50 0 empty empty Sp 3 7 0 8 -228856 -1 -1
+;
+#X obj 387 401 timer;
+#X floatatom 387 427 5 0 0 0 - - -;
+#X obj 386 457 t f f;
+#X obj 434 460 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 386 488 expr 1000 / $f1;
+#X msg 445 532 0;
+#X obj 269 402 vsl 80 20 0 2 0 0 empty empty vol(replay) 0 -9 0 9 -260097
+-1 -1 0 1;
+#X obj 362 224 loadbang;
+#X msg 426 224 0.9;
+#X obj 460 224 s faders;
+#X text 24 57 Both processes in this patch were learned from separate
+tutorials by YouTube author \, Andrew Brown (QCGInteractiveMusic) andrewbrown.net.au.
+I enhanced/added to in recreating. Do check out his channel!================
+;
+#X text 25 112 I liked the Slicer idea a lot as I have named it. It
+reads a WAV file and allows you to play portions of it live. I was
+interested in getting a capture for it which may seem redundant \,
+but in the end from a 'looper pedal' of Andrew's it made sense to implement
+the playback from the pedal patch.=====================================================
+;
+#X obj 30 718 s~ audio:1;
+#X obj 333 653 s~ audio:2;
+#X obj 240 508 r~ audio:1;
+#X obj 262 532 r~ audio:2;
+#X obj 259 329 bng 15 250 50 0 empty empty St 4 8 0 8 -257985 -1 -1
+;
+#X obj 301 329 bng 15 250 50 0 empty empty C 5 8 0 9 -258113 -1 -1
+;
+#X obj 323 329 bng 15 250 50 0 empty empty P 5 8 0 9 -4034 -1 -1;
+#X obj 346 329 bng 15 250 50 0 empty empty S 5 8 0 9 -33289 -1 -262144
+;
+#X obj 26 391 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 280 329 bng 15 250 50 0 empty empty Sp 4 8 0 8 -33289 -1 -262144
+;
+#X msg 109 601 0;
+#X text 38 192 Button legend: St=start segment \, Sp=stop segment \,
+C=capture \, P=play capture \, S=stop capture play;
+#X text 12 863 Patch by jgoodin \, 2022/06 \, from tutorials of Andrew
+Brown ref'd in the comments above.;
+#N canvas 223 725 585 160 rec_out 0;
+#X obj 5 7 inlet~ audio:1;
+#X obj 113 8 inlet~ audio:2;
+#X obj 221 8 inlet start;
+#X obj 308 8 inlet stop;
+#X obj 308 125 writesf~ 2;
+#X msg 308 96 stop;
+#X obj 308 71 del 1000;
+#X obj 204 126 dac~;
+#X msg 221 38 open /users/Admin/Documents/capturemix.wav \, start;
+#X connect 0 0 4 0;
+#X connect 0 0 7 0;
+#X connect 0 0 7 1;
+#X connect 1 0 4 0;
+#X connect 1 0 7 1;
+#X connect 1 0 7 0;
+#X connect 2 0 8 0;
+#X connect 3 0 6 0;
+#X connect 5 0 4 0;
+#X connect 6 0 5 0;
+#X connect 8 0 4 0;
+#X restore 240 564 pd rec_out;
+#X obj 284 430 bng 15 250 50 0 empty empty R 5 8 0 9 -258113 -1 -1
+;
+#X obj 302 430 bng 15 250 50 0 empty empty S 5 8 0 9 -1 -1 -262144
+;
+#X text 251 429 Rec:;
+#X text 319 429 to disc;
+#X text 227 585 record dir path \,;
+#X text 228 600 edit in rec_out;
+#X text 24 -2 This patch breaks up a WAV file and plays the segments
+chosen via the number object (noted). A second process (C Bang object)
+captures the edit and 'P' plays in the mix when clicked. =======================================================
+;
+#X text 5 318 user sel->;
+#X text 383 263 <- only the green swatch canvas is seen when the patch
+is ran. If you are new to PD a canvas is sort of a GUI. Other han Bang
+'buttons' \, comments \, number objects and faders \, all other objects
+and their connector cords are hidden.;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 6 1 11 1;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 10 0 25 1;
+#X connect 10 1 11 0;
+#X connect 11 0 12 0;
+#X connect 12 0 14 1;
+#X connect 12 0 15 1;
+#X connect 12 0 16 0;
+#X connect 13 0 14 0;
+#X connect 13 1 17 0;
+#X connect 14 0 18 0;
+#X connect 15 0 18 1;
+#X connect 16 0 18 2;
+#X connect 16 0 24 1;
+#X connect 17 0 15 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 20 0 21 0;
+#X connect 21 0 22 0;
+#X connect 22 0 58 0;
+#X connect 23 0 22 1;
+#X connect 24 0 25 0;
+#X connect 25 0 13 0;
+#X connect 25 0 26 0;
+#X connect 28 0 2 0;
+#X connect 30 0 7 0;
+#X connect 33 0 23 0;
+#X connect 35 0 40 0;
+#X connect 36 0 59 0;
+#X connect 37 0 36 1;
+#X connect 38 0 36 0;
+#X connect 39 0 35 0;
+#X connect 40 0 38 0;
+#X connect 41 0 40 1;
+#X connect 42 0 43 0;
+#X connect 43 0 44 0;
+#X connect 43 1 45 0;
+#X connect 44 0 46 0;
+#X connect 45 0 46 1;
+#X connect 46 0 47 0;
+#X connect 47 0 48 0;
+#X connect 48 0 50 0;
+#X connect 48 1 41 0;
+#X connect 49 0 50 0;
+#X connect 49 0 51 0;
+#X connect 50 0 35 0;
+#X connect 51 0 35 1;
+#X connect 52 0 37 0;
+#X connect 53 0 54 0;
+#X connect 54 0 55 0;
+#X connect 60 0 71 0;
+#X connect 61 0 71 1;
+#X connect 62 0 66 0;
+#X connect 63 0 42 0;
+#X connect 64 0 49 0;
+#X connect 65 0 39 0;
+#X connect 66 0 24 0;
+#X connect 67 0 68 0;
+#X connect 67 0 66 0;
+#X connect 68 0 20 0;
+#X connect 72 0 71 2;
+#X connect 73 0 71 3;
+#X coords 0 -1 1 1 120 200 2 250 250;
